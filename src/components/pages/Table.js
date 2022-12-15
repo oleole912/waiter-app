@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Col, Form, Row, Stack } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { getTableById, updateTable } from "../../redux/tablesRedux";
+import { getTableById, sendData } from "../../redux/tablesRedux";
 
 const Table = () => {
   const { id } = useParams();
@@ -35,15 +35,14 @@ const Table = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submitted!");
     const obj = {
-      id,
-      status,
+      id: id,
+      status: status,
       bill: bill.toString(),
       peopleAmount: peopleAmount.toString(),
       maxPeopleAmount: maxPeopleAmount.toString(),
     };
-    dispatch(updateTable(obj));
+    dispatch(sendData(obj));
     console.log(obj);
     navigate('/');
   };
