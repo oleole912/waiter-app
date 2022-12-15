@@ -10,7 +10,7 @@
     {
       "id": "2",
       "status": "Busy",
-      "peopleAmount": "1",
+      "peopleAmount": "0",
       "maxPeopleAmount": "3",
       "bill": "0"
     },

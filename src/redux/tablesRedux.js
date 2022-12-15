@@ -1,3 +1,4 @@
+
 // actions
 const createActionName = (actionName) => `app/tables/${actionName}`;
 export const SHOW_TABLES = createActionName("SHOW_TABLES");
@@ -31,8 +32,8 @@ export const sendData = (data) => {
     };
     fetch(`http://localhost:3131/tables/${data.id}`, options)
       .then((res) => res.json())
-      .then(data => console.log(data))
-      //.then((data) => dispatch(updateTable(data)))
+      //.then(data => console.log(data))
+      .then((data) => dispatch(updateTable(data)))
   };
 };
 
@@ -42,7 +43,7 @@ const tablesReducer = (statePart = [], action) => {
       return [...action.payload];
     case UPDATE_TABLE:
       return statePart.map((table) =>
-        table.id === action.payload.id ? { ...action.payload } : table
+        table.id === action.payload.id ? {...table, ...action.payload } : table
       );
     default:
       return statePart;
