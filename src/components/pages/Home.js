@@ -1,10 +1,16 @@
 import { Button, ListGroup, Stack, Spinner } from "react-bootstrap";
-import { useSelector } from "react-redux";
-import { getAllTables } from "../../redux/tablesRedux";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllTables, removeTableRequest } from "../../redux/tablesRedux";
 import { Link } from "react-router-dom";
 
 const Home = () => {
+  const dispatch = useDispatch();
   const tables = useSelector(getAllTables);
+
+  const handleClick = (e, id) => {
+    e.preventDefault();
+    dispatch(removeTableRequest(id));
+  };
 
   if (!tables) {
     return (
@@ -28,6 +34,12 @@ const Home = () => {
               <Link className="ms-auto" to={`/table/${table.id}`}>
                 <Button variant="primary">Show more</Button>
               </Link>
+              <Button
+                variant="primary"
+                onClick={(e) => handleClick(e, table.id)}
+              >
+                Remove table
+              </Button>
             </Stack>
           </ListGroup.Item>
         ))}
