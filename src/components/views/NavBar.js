@@ -13,6 +13,9 @@ const NavBar = () => {
                         <Nav.Item >
                             <Nav.Link as={ NavLink } to="/">Home</Nav.Link>
                         </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link as={NavLink} to ="/newtable">Add Table</Nav.Link>
+                        </Nav.Item>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

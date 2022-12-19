@@ -2,14 +2,9 @@ import { useEffect, useState } from "react";
 import { Button, Col, Form, Row, Stack } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { STATUSES } from "../../consts";
 import { getTableById, sendData } from "../../redux/tablesRedux";
 
-const statuses = {
-  busy: "Busy",
-  reserved: "Reserved",
-  free: "Free",
-  cleaning: "Cleaning",
-};
 
 const Table = () => {
   const { id } = useParams();
@@ -26,10 +21,10 @@ const Table = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (status === statuses.cleaning || status === statuses.free) {
+    if (status === STATUSES.cleaning || status === STATUSES.free) {
       setPeopleAmount(0);
     }
-    if (status !== statuses.busy) {
+    if (status !== STATUSES.busy) {
       setBill(0);
     }
   }, [status]);
@@ -68,7 +63,7 @@ const Table = () => {
               value={status}
               onChange={(e) => setStatus(e.target.value)}
             >
-              {Object.values(statuses).map((value) => (
+              {Object.values(STATUSES).map((value) => (
                 <option key={value}>{value}</option>
               ))}
             </Form.Select>
@@ -100,7 +95,7 @@ const Table = () => {
         </Form.Group>
         <Form.Group
           as={Row}
-          className={status !== statuses.busy ? "d-none" : "my-3"}
+          className={status !== STATUSES.busy ? "d-none" : "my-3"}
         >
           <Stack direction="horizontal">
             <Form.Label column sm={2} lg={1}>
