@@ -4,6 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { getTableById, sendData } from "../../redux/tablesRedux";
 
+const statuses = {
+  busy: "Busy",
+  reserved: "Reserved",
+  free: "Free",
+  cleaning: "Cleaning",
+};
+
 const Table = () => {
   const { id } = useParams();
   const table = useSelector((state) => getTableById(state, id));
@@ -19,11 +26,11 @@ const Table = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (status === "Cleaning" || status === "Free") {
-      setPeopleAmount("0");
+    if (status === statuses.cleaning || status === statuses.free) {
+      setPeopleAmount(0);
     }
-    if (status !== "Busy") {
-      setBill("0");
+    if (status !== statuses.busy) {
+      setBill(0);
     }
   }, [status]);
 
@@ -36,15 +43,15 @@ const Table = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const obj = {
-      id: id,
-      status: status,
-      bill: bill.toString(),
-      peopleAmount: peopleAmount.toString(),
-      maxPeopleAmount: maxPeopleAmount.toString(),
+      id,
+      status,
+      bill,
+      peopleAmount,
+      maxPeopleAmount,
     };
     dispatch(sendData(obj));
     console.log(obj);
-    navigate('/');
+    navigate("/");
   };
 
   if (!table) return <Navigate to="/" />;
@@ -61,10 +68,9 @@ const Table = () => {
               value={status}
               onChange={(e) => setStatus(e.target.value)}
             >
-              <option>Busy</option>
-              <option>Reserved</option>
-              <option>Free</option>
-              <option>Cleaning</option>
+              {Object.values(statuses).map((value) => (
+                <option key={value}>{value}</option>
+              ))}
             </Form.Select>
           </Col>
         </Form.Group>
@@ -92,7 +98,10 @@ const Table = () => {
             />
           </Col>
         </Form.Group>
-        <Form.Group as={Row} className={status !== "Busy" ? "d-none" : "my-3"}>
+        <Form.Group
+          as={Row}
+          className={status !== statuses.busy ? "d-none" : "my-3"}
+        >
           <Stack direction="horizontal">
             <Form.Label column sm={2} lg={1}>
               <strong>Bill:</strong>
