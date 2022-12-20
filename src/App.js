@@ -21,6 +21,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />}></Route>
+        <Route path="/tables" element={<Home />}></Route>
         <Route path="/newtable" element={<AddTableForm />}></Route>
         <Route path="/table/:id" element={<Table />}></Route>
         <Route path="*" element={<NotFound />}></Route>

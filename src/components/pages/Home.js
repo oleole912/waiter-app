@@ -1,15 +1,18 @@
 import { Button, ListGroup, Stack, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllTables, removeTableRequest } from "../../redux/tablesRedux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const tables = useSelector(getAllTables);
 
-  const handleClick = (e, id) => {
-    e.preventDefault();
+  const handleClick = (id) => {
+    console.log(id);
+    console.log(typeof id) // string
     dispatch(removeTableRequest(id));
+    navigate("/");
   };
 
   if (!tables) {
@@ -36,7 +39,7 @@ const Home = () => {
               </Link>
               <Button
                 variant="primary"
-                onClick={(e) => handleClick(e, table.id)}
+                onClick={() => handleClick(table.id)}
               >
                 Remove table
               </Button>

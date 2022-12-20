@@ -67,9 +67,17 @@ export const addTableRequest = (id) => {
 
 export const removeTableRequest = (id) => {
   return (dispatch) => {
-    fetch(`${API_URL}/tables/${id}`, { method: "DELETE" })
+    const removedId = {id};
+    const options = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(removedId),
+    }
+    fetch(`${API_URL}/tables/${id}`, options)
       .then((res) => res.json())
-      .then((data) => console.log(data + "removed"));
+      .then((data) => dispatch(removeTable(data)));
   };
 };
 
