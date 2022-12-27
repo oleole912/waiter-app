@@ -68,6 +68,7 @@ export const addTableRequest = (id) => {
 export const removeTableRequest = (id) => {
   return (dispatch) => {
     const removedId = {id};
+
     const options = {
       method: "DELETE",
       headers: {
@@ -77,7 +78,8 @@ export const removeTableRequest = (id) => {
     }
     fetch(`${API_URL}/tables/${id}`, options)
       .then((res) => res.json())
-      .then((data) => dispatch(removeTable(data)));
+      //.then((data) => console.log('data', data));
+      .then((data) => dispatch(removeTable(id)));
   };
 };
 
@@ -98,6 +100,7 @@ const tablesReducer = (statePart = [], action) => {
       ];
     case REMOVE_TABLE:
       return statePart.filter((table) => table.id !== action.payload);
+      //return statePart.map(table => table.id !== action.payload ? {...table} : null )
     default:
       return statePart;
   }

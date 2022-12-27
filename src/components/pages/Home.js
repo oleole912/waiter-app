@@ -9,8 +9,6 @@ const Home = () => {
   const tables = useSelector(getAllTables);
 
   const handleClick = (id) => {
-    console.log(id);
-    console.log(typeof id) // string
     dispatch(removeTableRequest(id));
     navigate("/");
   };
