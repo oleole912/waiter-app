@@ -13,6 +13,20 @@
       "bill": 0,
       "maxPeople": 0,
       "status": "Free"
+    },
+    {
+      "id": "3",
+      "peopleAmount": 0,
+      "bill": 0,
+      "maxPeople": 0,
+      "status": "Free"
+    },
+    {
+      "id": "4",
+      "peopleAmount": 0,
+      "bill": 0,
+      "maxPeople": 0,
+      "status": "Free"
     }
   ]
 }
